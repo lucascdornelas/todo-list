@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<{ text: string; completed: boolean }[]>([]);
   const [newTask, setNewTask] = useState("");
   const [filterText, setFilterText] = useState("");
 
@@ -14,19 +14,19 @@ export function App() {
     setNewTask("");
   };
 
-  const removeTask = (index) => {
+  const removeTask = (index: number) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   };
 
-  const editTask = (index, newText) => {
+  const editTask = (index: number, newText: string) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, text: newText } : task
     );
     setTasks(updatedTasks);
   };
 
-  const toggleTaskCompletion = (index) => {
+  const toggleTaskCompletion = (index: number) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, completed: !task.completed } : task
     );
