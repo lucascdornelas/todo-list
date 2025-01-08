@@ -36,7 +36,7 @@ export function App() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Lista de Tarefas</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center text-localiza-green">Lista de Tarefas</h1>
 
         <div className="mb-4">
           <input
@@ -48,7 +48,7 @@ export function App() {
           />
           <button
             onClick={addTask}
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+            className="w-full bg-localiza-green text-white py-2 rounded-lg hover:bg-localiza-green-dark transition"
           >
             Adicionar Tarefa
           </button>
