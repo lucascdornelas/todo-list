@@ -34,38 +34,74 @@ export function App() {
   };
 
   return (
-    <div>
-      <h1>Lista de Tarefas</h1>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-4 text-center">Lista de Tarefas</h1>
 
-      <input
-        type="text"
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-      />
-      <button onClick={addTask}>Adicionar</button>
+        <div className="mb-4">
+          <input
+            type="text"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            placeholder="Digite uma nova tarefa"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+          />
+          <button
+            onClick={addTask}
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+          >
+            Adicionar Tarefa
+          </button>
+        </div>
 
-      <input
-        type="text"
-        placeholder="Filtrar por texto"
-        value={filterText}
-        onChange={(e) => setFilterText(e.target.value)}
-      />
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Filtrar por texto"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <input
-              type="text"
-              value={task.text}
-              onChange={(e) => editTask(index, e.target.value)}
-            />
-            <button onClick={() => toggleTaskCompletion(index)}>
-              {task.completed ? "Desmarcar" : "Concluir"}
-            </button>
-            <button onClick={() => removeTask(index)}>Remover</button>
-          </li>
-        ))}
-      </ul>
+        <ul className="space-y-2">
+          {tasks
+            .filter((task) =>
+              task.text.toLowerCase().includes(filterText.toLowerCase())
+            )
+            .map((task, index) => (
+              <li
+                key={index}
+                className={`flex items-center justify-between p-2 rounded-lg ${
+                  task.completed ? "bg-green-100" : "bg-gray-100"
+                }`}
+              >
+                <input
+                  type="text"
+                  value={task.text}
+                  onChange={(e) => editTask(index, e.target.value)}
+                  className="flex-1 px-2 py-1 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 mr-2"
+                />
+                <button
+                  onClick={() => toggleTaskCompletion(index)}
+                  className={`px-4 py-2 rounded-lg text-white transition ${
+                    task.completed
+                      ? "bg-yellow-500 hover:bg-yellow-600"
+                      : "bg-green-500 hover:bg-green-600"
+                  }`}
+                >
+                  {task.completed ? "Desmarcar" : "Concluir"}
+                </button>
+                <button
+                  onClick={() => removeTask(index)}
+                  className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                >
+                  Remover
+                </button>
+              </li>
+            ))}
+        </ul>
+      </div>
     </div>
   );
 }
