@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'localiza-green': '#009739',
-        'localiza-green-dark': '#007c2f',
+        'localiza-green': '#01602a',
+        'localiza-green-dark': '#004d22',
         'localiza-gray': '#f4f4f4',
         'localiza-text': '#333333',
       },
