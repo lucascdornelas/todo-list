@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterBar from "./components/FilterBar";
-import TaskItem from "./components/TaskItem";
+import TaskList from "./components/TaskList";
 
 export function App() {
   const [tasks, setTasks] = useState<{ text: string; completed: boolean }[]>(
@@ -58,29 +58,14 @@ export function App() {
           setFilter={setFilter}
         />
 
-        <ul className="space-y-2">
-          {tasks
-            .filter((task) =>
-              task.text.toLowerCase().includes(filterText.toLowerCase())
-            )
-            .filter((task) =>
-              filter === "all"
-                ? true
-                : filter === "active"
-                ? !task.completed
-                : task.completed
-            )
-            .map((task, index) => (
-              <TaskItem
-                key={index}
-                index={index}
-                removeTask={removeTask}
-                task={task}
-                toggleTaskCompletion={toggleTaskCompletion}
-                editTask={editTask}
-              />
-            ))}
-        </ul>
+        <TaskList 
+          tasks={tasks}
+          filterText={filterText}
+          filter={filter}
+          removeTask={removeTask}
+          toggleTaskCompletion={toggleTaskCompletion}
+          editTask={editTask}
+        />
       </div>
     </div>
   );
