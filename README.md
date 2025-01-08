@@ -21,7 +21,7 @@ A aplicação consiste em um app de lista de tarefas, para auxiliar o usuário a
   - [ ] Marcar todas as tarefas como concluídas
   - [ ] Excluir todas as tarefas concluídas
 - [ ] **Testes**: Adicionar testes unitários para garantir a qualidade do código
-- [ ] **TypeScript**: Utilizar TypeScript para adicionar tipagem ao código
+- [x] **TypeScript**: Utilizar TypeScript para adicionar tipagem ao código
 
 ## Ideias Extras
 
