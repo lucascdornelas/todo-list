@@ -27,9 +27,9 @@ export default function FilterBar({
       </button>
       <button
         onClick={() => setFilter("active")}
-        className={`px-4 py-2 rounded-lg text-white transition ${
+        className={`px-4 py-2 rounded-lg transition ${
           filter === "active"
-            ? "bg-localiza-green hover:bg-localiza-green-dark"
+            ? "bg-localiza-green hover:bg-localiza-green-dark text-white"
             : "border border-gray-300 text-gray-700"
         }`}
       >
@@ -37,9 +37,9 @@ export default function FilterBar({
       </button>
       <button
         onClick={() => setFilter("completed")}
-        className={`px-4 py-2 rounded-lg text-white transition ${
+        className={`px-4 py-2 rounded-lg transition ${
           filter === "completed"
-            ? "bg-localiza-green hover:bg-localiza-green-dark"
+            ? "bg-localiza-green hover:bg-localiza-green-dark text-white"
             : "border border-gray-300 text-gray-700"
         }`}
       >

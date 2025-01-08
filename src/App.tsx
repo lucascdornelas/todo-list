@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterBar from "./components/FilterBar";
+import TaskItem from "./components/TaskItem";
 
 export function App() {
   const [tasks, setTasks] = useState<{ text: string; completed: boolean }[]>(
@@ -65,35 +66,13 @@ export function App() {
                 : task.completed
             )
             .map((task, index) => (
-              <li
+              <TaskItem
                 key={index}
-                className={`flex items-center justify-between p-2 rounded-lg ${
-                  task.completed ? "bg-green-100" : "bg-gray-100"
-                }`}
-              >
-                <input
-                  type="text"
-                  value={task.text}
-                  onChange={(e) => editTask(index, e.target.value)}
-                  className="flex-1 px-2 py-1 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 mr-2"
-                />
-                <button
-                  onClick={() => toggleTaskCompletion(index)}
-                  className={`px-4 py-2 rounded-lg text-white transition ${
-                    task.completed
-                      ? "bg-yellow-500 hover:bg-yellow-600"
-                      : "bg-green-500 hover:bg-green-600"
-                  }`}
-                >
-                  {task.completed ? "Desmarcar" : "Concluir"}
-                </button>
-                <button
-                  onClick={() => removeTask(index)}
-                  className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                >
-                  Remover
-                </button>
-              </li>
+                index={index}
+                removeTask={removeTask}
+                task={task}
+                toggleTaskCompletion={toggleTaskCompletion}
+              />
             ))}
         </ul>
       </div>
