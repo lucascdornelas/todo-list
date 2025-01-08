@@ -64,7 +64,7 @@ export default function TaskItem(props: TaskItemProps) {
 
       <button
         onClick={() => toggleTaskCompletion(index)}
-        className={`flex items-center justify-center w-10 h-10 rounded-lg border transition ${
+        className={`ml-3 flex items-center justify-center w-10 h-10 rounded-lg border transition ${
           task.completed
             ? "border-yellow-500 text-yellow-500 hover:bg-yellow-100"
             : "border-green-500 text-green-500 hover:bg-green-100"
