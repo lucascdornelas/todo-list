@@ -16,13 +16,13 @@ export default function AddTask({ onAdd }: AddTaskProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex space-x-2 mb-4">
+    <form onSubmit={handleSubmit} className="flex space-x-2 mb-4 pb-2">
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Digite uma nova tarefa"
-        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button
         type="submit"
