@@ -1,9 +1,13 @@
 import { useState } from "react";
 import AddTask from "./components/AddTask";
+import FilterBar from "./components/FilterBar";
 
 export function App() {
-  const [tasks, setTasks] = useState<{ text: string; completed: boolean }[]>([]);
+  const [tasks, setTasks] = useState<{ text: string; completed: boolean }[]>(
+    []
+  );
   const [filterText, setFilterText] = useState("");
+  const [filter, setFilter] = useState("all");
 
   const addTask = (newTask: string) => {
     const newTaskObj = {
@@ -35,24 +39,30 @@ export function App() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <h1 className="text-2xl font-bold mb-4 text-center text-localiza-green">Lista de Tarefas</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center text-localiza-green">
+          Lista de Tarefas
+        </h1>
 
         <AddTask onAdd={addTask} />
 
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Filtrar por texto"
-            value={filterText}
-            onChange={(e) => setFilterText(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        <FilterBar
+          searchText={filterText}
+          setSearchText={setFilterText}
+          filter={filter}
+          setFilter={setFilter}
+        />
 
         <ul className="space-y-2">
           {tasks
             .filter((task) =>
               task.text.toLowerCase().includes(filterText.toLowerCase())
+            )
+            .filter((task) =>
+              filter === "all"
+                ? true
+                : filter === "active"
+                ? !task.completed
+                : task.completed
             )
             .map((task, index) => (
               <li
