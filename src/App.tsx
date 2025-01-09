@@ -3,6 +3,7 @@ import AddTask from "./components/AddTask";
 import FilterBar from "./components/FilterBar";
 import TaskList from "./components/TaskList";
 import { Task } from "./types";
+import BatchActionsBar from "./components/BatchActionsBar";
 
 export function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -37,6 +38,15 @@ export function App() {
     setTasks(updatedTasks);
   };
 
+  const deleteAllTasks = () => {
+    setTasks([]);
+  };
+
+  const markAllCompleted = () => {
+    const updatedTasks = tasks.map((task) => ({ ...task, completed: true }));
+    setTasks(updatedTasks);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
@@ -65,6 +75,11 @@ export function App() {
           removeTask={removeTask}
           toggleTaskCompletion={toggleTaskCompletion}
           editTask={editTask}
+        />
+
+        <BatchActionsBar
+          deleteAllTasks={deleteAllTasks}
+          markAllCompleted={markAllCompleted}
         />
       </div>
     </div>
