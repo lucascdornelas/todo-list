@@ -81,20 +81,20 @@ export default function TaskList(props: TaskListProps) {
           onClick={() => changePage(currentPage - 1)}
           className={`px-3 py-1 rounded-lg border ${
             currentPage === 1
-              ? "text-gray-400 border-gray-300 cursor-not-allowed"
-              : "text-gray-700 border-gray-400 hover:bg-gray-100"
+              ? "text-gray-400 border-gray-300 cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-200 dark:border-gray-400 dark:text-gray-700"
+              : "text-gray-700 border-gray-400 dark:text-gray-100 dark:border-gray-500"
           }`}
           disabled={currentPage === 1}
         >
           <ChevronLeft size={16} />
         </button>
-        <span className="px-3 py-1 text-gray-700">{`${currentPage} de ${totalPages}`}</span>
+        <span className="px-3 py-1 text-gray-700 dark:text-gray-300">{`${currentPage} de ${totalPages}`}</span>
         <button
           onClick={() => changePage(currentPage + 1)}
           className={`px-3 py-1 rounded-lg border ${
             currentPage === totalPages
-              ? "text-gray-400 border-gray-300 cursor-not-allowed"
-              : "text-gray-700 border-gray-400 hover:bg-gray-100"
+              ? "text-gray-400 border-gray-300 cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-200 dark:border-gray-400 dark:text-gray-700"
+              : "text-gray-700 border-gray-400 dark:text-gray-100 dark:border-gray-500"
           }`}
           disabled={currentPage === totalPages}
         >

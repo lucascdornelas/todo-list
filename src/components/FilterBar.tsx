@@ -12,8 +12,8 @@ export default function FilterBar() {
         onClick={() => setFilter("all")}
         className={`px-4 py-2 rounded-lg transition ${
           filter === "all"
-            ? "bg-localiza-green hover:bg-localiza-green-dark text-white"
-            : "border border-gray-300 text-gray-700"
+            ? "border border-localiza-green bg-localiza-green hover:bg-localiza-green-dark text-white"
+            : "border border-gray-300 text-gray-700 dark:text-gray-300"
         }`}
       >
         Todas
@@ -22,8 +22,8 @@ export default function FilterBar() {
         onClick={() => setFilter("active")}
         className={`px-4 py-2 rounded-lg transition ${
           filter === "active"
-            ? "bg-localiza-green hover:bg-localiza-green-dark text-white"
-            : "border border-gray-300 text-gray-700"
+            ? "border border-localiza-green bg-localiza-green hover:bg-localiza-green-dark text-white"
+            : "border border-gray-300 text-gray-700 dark:text-gray-300"
         }`}
       >
         Ativas
@@ -32,8 +32,8 @@ export default function FilterBar() {
         onClick={() => setFilter("completed")}
         className={`px-4 py-2 rounded-lg transition ${
           filter === "completed"
-            ? "bg-localiza-green hover:bg-localiza-green-dark text-white"
-            : "border border-gray-300 text-gray-700"
+            ? "border border-localiza-green bg-localiza-green hover:bg-localiza-green-dark text-white"
+            : "border border-gray-300 text-gray-700 dark:text-gray-300"
         }`}
       >
         Completas
@@ -43,7 +43,7 @@ export default function FilterBar() {
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
         placeholder="Buscar tarefa"
-        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800"
       />
     </div>
   );

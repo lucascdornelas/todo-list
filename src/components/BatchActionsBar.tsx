@@ -8,7 +8,7 @@ export default function BatchActionsBar() {
     <div className="flex justify-start mt-4 space-x-2">
       <button
         onClick={markAllCompleted}
-        className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+        className="px-4 py-2 bg-localiza-green text-white rounded-lg hover:bg-localiza-green-dark transition"
       >
         Marcar Todas como Completas
       </button>
