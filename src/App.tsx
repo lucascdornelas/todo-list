@@ -2,37 +2,37 @@ import { useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterBar from "./components/FilterBar";
 import TaskList from "./components/TaskList";
+import { Task } from "./types";
 
 export function App() {
-  const [tasks, setTasks] = useState<{ text: string; completed: boolean }[]>(
-    []
-  );
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [filterText, setFilterText] = useState("");
   const [filter, setFilter] = useState("all");
 
   const addTask = (newTask: string) => {
     const newTaskObj = {
+      id: tasks.length,
       text: newTask,
       completed: false,
     };
     setTasks([...tasks, newTaskObj]);
   };
 
-  const removeTask = (index: number) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
+  const removeTask = (id: number) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
   };
 
-  const editTask = (index: number, newText: string) => {
-    const updatedTasks = tasks.map((task, i) =>
-      i === index ? { ...task, text: newText } : task
+  const editTask = (id: number, newText: string) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, text: newText } : task
     );
     setTasks(updatedTasks);
   };
 
-  const toggleTaskCompletion = (index: number) => {
-    const updatedTasks = tasks.map((task, i) =>
-      i === index ? { ...task, completed: !task.completed } : task
+  const toggleTaskCompletion = (id: number) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
   };
@@ -58,7 +58,7 @@ export function App() {
           setFilter={setFilter}
         />
 
-        <TaskList 
+        <TaskList
           tasks={tasks}
           filterText={filterText}
           filter={filter}

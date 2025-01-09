@@ -1,23 +1,23 @@
 import { Check, Undo2, Trash2, Edit2 } from "lucide-react";
 import { useState } from "react";
+import { Task } from "../types";
 
 type TaskItemProps = {
-  task: { text: string; completed: boolean };
-  index: number;
-  toggleTaskCompletion: (index: number) => void;
-  removeTask: (index: number) => void;
-  editTask: (index: number, newText: string) => void;
+  task: Task;
+  toggleTaskCompletion: (id: number) => void;
+  removeTask: (id: number) => void;
+  editTask: (id: number, newText: string) => void;
 };
 
 export default function TaskItem(props: TaskItemProps) {
-  const { task, index, toggleTaskCompletion, removeTask, editTask } = props;
+  const { task, toggleTaskCompletion, removeTask, editTask } = props;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(task.text);
 
   const handleSaveEdit = () => {
     if (editedText.trim() !== "") {
-      editTask(index, editedText.trim());
+      editTask(task.id, editedText.trim());
     }
     setIsEditing(false);
   };
@@ -63,7 +63,7 @@ export default function TaskItem(props: TaskItemProps) {
       )}
 
       <button
-        onClick={() => toggleTaskCompletion(index)}
+        onClick={() => toggleTaskCompletion(task.id)}
         className={`ml-3 flex items-center justify-center w-10 h-10 rounded-lg border transition ${
           task.completed
             ? "border-yellow-500 text-yellow-500 hover:bg-yellow-100"
@@ -83,7 +83,7 @@ export default function TaskItem(props: TaskItemProps) {
       </button>
 
       <button
-        onClick={() => removeTask(index)}
+        onClick={() => removeTask(task.id)}
         className="ml-3 flex items-center justify-center w-10 h-10 rounded-lg border border-red-500 text-red-500 hover:bg-red-100 transition"
         aria-label="Remover Tarefa"
       >

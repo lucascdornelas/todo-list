@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Task } from "../types";
 
 type TaskListProps = {
-  tasks: { text: string; completed: boolean }[];
+  tasks: Task[];
   filterText: string;
   filter: string;
-  removeTask: (index: number) => void;
-  toggleTaskCompletion: (index: number) => void;
-  editTask: (index: number, newText: string) => void;
+  removeTask: (id: number) => void;
+  toggleTaskCompletion: (id: number) => void;
+  editTask: (id: number, newText: string) => void;
   tasksPerPage?: number;
 };
 
@@ -62,8 +63,7 @@ export default function TaskList(props: TaskListProps) {
       <ul className="space-y-2">
         {currentTasks.map((task, index) => (
           <TaskItem
-            key={startIndex + index}
-            index={startIndex + index}
+            key={task.id}
             removeTask={removeTask}
             task={task}
             toggleTaskCompletion={toggleTaskCompletion}
