@@ -60,16 +60,22 @@ export default function TaskList(props: TaskListProps) {
 
   return (
     <div>
-      <ul className="space-y-2">
-        {currentTasks.map((task, index) => (
-          <TaskItem
-            key={task.id}
-            removeTask={removeTask}
-            task={task}
-            toggleTaskCompletion={toggleTaskCompletion}
-            editTask={editTask}
-          />
-        ))}
+      <ul className="space-y-2 h-[420px] overflow-y-auto border border-gray-300 rounded-lg p-2">
+        {currentTasks.length > 0 ? (
+          currentTasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              removeTask={removeTask}
+              task={task}
+              toggleTaskCompletion={toggleTaskCompletion}
+              editTask={editTask}
+            />
+          ))
+        ) : (
+          <li className="text-center text-gray-500 py-4">
+            Nenhuma tarefa encontrada.
+          </li>
+        )}
       </ul>
 
       <div className="flex items-center justify-center mt-4 space-x-2">
