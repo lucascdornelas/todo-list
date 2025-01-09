@@ -1,12 +1,9 @@
-type BatchActionsBarProps = {
-  markAllCompleted: () => void;
-  deleteAllTasks: () => void;
-};
+import useTaskStore from "../store/taskStore";
 
-export default function BatchActionsBar({
-  markAllCompleted,
-  deleteAllTasks,
-}: BatchActionsBarProps) {
+export default function BatchActionsBar() {
+  const deleteAllTasks = useTaskStore((state) => state.deleteAllTasks);
+  const markAllCompleted = useTaskStore((state) => state.markAllCompleted);
+
   return (
     <div className="flex justify-start mt-4 space-x-2">
       <button

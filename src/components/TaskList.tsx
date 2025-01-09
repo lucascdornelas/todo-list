@@ -1,28 +1,26 @@
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Task } from "../types";
+import useTaskStore from "../store/taskStore";
 
 type TaskListProps = {
-  tasks: Task[];
-  filterText: string;
-  filter: string;
-  removeTask: (id: number) => void;
-  toggleTaskCompletion: (id: number) => void;
-  editTask: (id: number, newText: string) => void;
   tasksPerPage?: number;
 };
 
 export default function TaskList(props: TaskListProps) {
   const {
-    tasks,
-    filterText,
-    filter,
-    removeTask,
-    toggleTaskCompletion,
-    editTask,
     tasksPerPage = 5,
   } = props;
+
+  const tasks = useTaskStore((state) => state.tasks);
+  const removeTask = useTaskStore((state) => state.removeTask);
+  const toggleTaskCompletion = useTaskStore(
+    (state) => state.toggleTaskCompletion
+  );
+  const editTask = useTaskStore((state) => state.editTask);
+
+  const filterText = useTaskStore((state) => state.filterText);
+  const filter = useTaskStore((state) => state.filter);
 
   const [currentPage, setCurrentPage] = useState(1);
 

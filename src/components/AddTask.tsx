@@ -1,16 +1,14 @@
 import React, { useState } from "react";
+import useTaskStore from "../store/taskStore";
 
-interface AddTaskProps {
-  onAdd: (text: string) => void;
-}
-
-export default function AddTask({ onAdd }: AddTaskProps) {
+export default function AddTask() {
+  const addTask = useTaskStore((state) => state.addTask);
+  
   const [text, setText] = useState("");
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (text.trim()) {
-      onAdd(text.trim());
+      addTask(text.trim());
       setText("");
     }
   };
