@@ -1,51 +1,22 @@
-import { useState } from "react";
 import AddTask from "./components/AddTask";
 import FilterBar from "./components/FilterBar";
 import TaskList from "./components/TaskList";
-import { Task } from "./types";
 import BatchActionsBar from "./components/BatchActionsBar";
+import useTaskStore from "./store/taskStore";
 
 export function App() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [filterText, setFilterText] = useState("");
-  const [filter, setFilter] = useState("all");
+  const tasks = useTaskStore((state) => state.tasks);
+  const addTask = useTaskStore((state) => state.addTask);
+  const removeTask = useTaskStore((state) => state.removeTask);
+  const toggleTaskCompletion = useTaskStore((state) => state.toggleTaskCompletion);
+  const editTask = useTaskStore((state) => state.editTask);
+  const deleteAllTasks = useTaskStore((state) => state.deleteAllTasks);
+  const markAllCompleted = useTaskStore((state) => state.markAllCompleted);
 
-  const addTask = (newTask: string) => {
-    const newTaskObj = {
-      id: tasks.length,
-      text: newTask,
-      completed: false,
-    };
-    setTasks([...tasks, newTaskObj]);
-  };
-
-  const removeTask = (id: number) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-  };
-
-  const editTask = (id: number, newText: string) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, text: newText } : task
-    );
-    setTasks(updatedTasks);
-  };
-
-  const toggleTaskCompletion = (id: number) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    );
-    setTasks(updatedTasks);
-  };
-
-  const deleteAllTasks = () => {
-    setTasks([]);
-  };
-
-  const markAllCompleted = () => {
-    const updatedTasks = tasks.map((task) => ({ ...task, completed: true }));
-    setTasks(updatedTasks);
-  };
+  const filterText = useTaskStore((state) => state.filterText);
+  const setFilterText = useTaskStore((state) => state.setFilterText);
+  const filter = useTaskStore((state) => state.filter);
+  const setFilter = useTaskStore((state) => state.setFilter);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
