@@ -81,6 +81,7 @@ export default function TaskList(props: TaskListProps) {
           size="sm"
           onClick={() => changePage(currentPage - 1)}
           disabled={currentPage === 1}
+          aria-label="Página anterior"
         >
           <ChevronLeft size={16} />
         </Button>
@@ -90,6 +91,7 @@ export default function TaskList(props: TaskListProps) {
           size="sm"
           onClick={() => changePage(currentPage + 1)}
           disabled={currentPage === totalPages}
+          aria-label="Próxima página"
         >
           <ChevronRight size={16} />
         </Button>
