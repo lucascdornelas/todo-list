@@ -1,6 +1,7 @@
 import { Check, Undo2, Trash2, Edit2 } from "lucide-react";
 import { useState } from "react";
 import { Task } from "../types";
+import Button from "./ui/Button";
 
 type TaskItemProps = {
   task: Task;
@@ -30,14 +31,12 @@ export default function TaskItem(props: TaskItemProps) {
   const toggleEdit = () => {
     if (isEditing) handleSaveEdit();
     else setIsEditing(true);
-  }
+  };
 
   return (
     <li
       className={`flex items-center justify-between p-4 rounded-lg border shadow-sm bg-white dark:bg-gray-800 transition
-         ${
-        task.completed ? "border-green-500" : "border-gray-300"
-      }`}
+         ${task.completed ? "border-green-500" : "border-gray-300"}`}
     >
       {isEditing ? (
         <input
@@ -45,7 +44,7 @@ export default function TaskItem(props: TaskItemProps) {
           value={editedText}
           onChange={(e) => setEditedText(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") handleSaveEdit(); 
+            if (e.key === "Enter") handleSaveEdit();
             if (e.key === "Escape") handleCancelEdit();
           }}
           onBlur={handleSaveEdit}
@@ -56,40 +55,44 @@ export default function TaskItem(props: TaskItemProps) {
         <span
           onDoubleClick={() => setIsEditing(true)}
           className={`flex-1 text-sm cursor-pointer ${
-            task.completed ? "line-through text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-gray-300"
+            task.completed
+              ? "line-through text-gray-500 dark:text-gray-400"
+              : "text-gray-800 dark:text-gray-300"
           }`}
         >
           {task.text}
         </span>
       )}
 
-      <button
+      <Button
         onClick={() => toggleTaskCompletion(task.id)}
-        className={`ml-3 flex items-center justify-center w-10 h-10 rounded-lg border transition ${
-          task.completed
-            ? "border-yellow-500 text-yellow-500 hover:bg-yellow-100 dark:border-yellow-400 dark:text-yellow-400 dark:hover:bg-yellow-900"
-            : "border-green-500 text-green-500 hover:bg-green-100 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900"
-        }`}
+        className={"ml-3 flex items-center justify-center w-10 h-10"}
+        variant="success"
+        size="icon"
         aria-label="Alternar Completude da Tarefa"
       >
         {task.completed ? <Undo2 size={20} /> : <Check size={20} />}
-      </button>
+      </Button>
 
-      <button
+      <Button
         onClick={toggleEdit}
-        className="ml-3 flex items-center justify-center w-10 h-10 rounded-lg border border-gray-500 text-gray-500 hover:bg-gray-100 transition dark:border-gray-400 dark:text-gray-400 dark:hover:bg-gray-900"
+        className="ml-3 flex items-center justify-center w-10 h-10"
+        variant="neutral"
+        size="icon"
         aria-label="Editar Tarefa"
       >
         <Edit2 size={20} />
-      </button>
+      </Button>
 
-      <button
+      <Button
         onClick={() => removeTask(task.id)}
-        className="ml-3 flex items-center justify-center w-10 h-10 rounded-lg border border-red-500 text-red-500 hover:bg-red-100 transition dark:border-red-400 dark:text-red-400 dark:hover:bg-red-900"
+        className="ml-3 flex items-center justify-center w-10 h-10 rounded-lg border"
+        variant="warning"
+        size="icon"
         aria-label="Remover Tarefa"
       >
         <Trash2 size={20} />
-      </button>
+      </Button>
     </li>
   );
 }

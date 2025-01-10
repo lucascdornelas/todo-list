@@ -1,4 +1,5 @@
 import useTaskStore from "../store/taskStore";
+import Button from "./ui/Button";
 
 export default function BatchActionsBar() {
   const deleteAllTasks = useTaskStore((state) => state.deleteAllTasks);
@@ -6,18 +7,10 @@ export default function BatchActionsBar() {
 
   return (
     <div className="flex justify-start mt-4 space-x-2">
-      <button
-        onClick={markAllCompleted}
-        className="px-4 py-2 bg-localiza-green text-white rounded-lg hover:bg-localiza-green-dark transition"
-      >
-        Marcar Todas como Completas
-      </button>
-      <button
-        onClick={deleteAllTasks}
-        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-      >
+      <Button onClick={markAllCompleted}>Marcar Todas como Completas</Button>
+      <Button onClick={deleteAllTasks} variant="destructive">
         Excluir Todas
-      </button>
+      </Button>
     </div>
   );
 }

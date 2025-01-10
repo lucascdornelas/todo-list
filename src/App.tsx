@@ -5,6 +5,7 @@ import BatchActionsBar from "./components/BatchActionsBar";
 import useThemeStore from "./store/themeStore";
 
 import { MoonIcon, SunIcon } from "lucide-react";
+import Button from "./components/ui/Button";
 
 export function App() {
   const theme = useThemeStore((state) => state.theme);
@@ -23,16 +24,13 @@ export function App() {
                 Organize e gerencie suas tarefas diárias
               </p>
             </div>
-            <button
-              onClick={toggleTheme}
-              className="px-4 py-2 bg-localiza-green text-white rounded-lg hover:bg-localiza-green-dark transition"
-            >
+            <Button onClick={toggleTheme}>
               {theme === "light" ? (
                 <MoonIcon size={16} />
               ) : (
                 <SunIcon size={16} />
               )}
-            </button>
+            </Button>
           </div>
           <AddTask />
           <FilterBar />

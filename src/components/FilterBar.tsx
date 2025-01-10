@@ -1,4 +1,5 @@
 import useTaskStore from "../store/taskStore";
+import Button from "./ui/Button";
 
 export default function FilterBar() {
   const filterText = useTaskStore((state) => state.filterText);
@@ -8,36 +9,24 @@ export default function FilterBar() {
 
   return (
     <div className="flex items-center space-x-2 mb-4">
-      <button
+      <Button
         onClick={() => setFilter("all")}
-        className={`px-4 py-2 rounded-lg transition ${
-          filter === "all"
-            ? "border border-localiza-green bg-localiza-green hover:bg-localiza-green-dark text-white"
-            : "border border-gray-300 text-gray-700 dark:text-gray-300"
-        }`}
+        variant={filter === "all" ? "primary" : "secondary"}
       >
         Todas
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => setFilter("active")}
-        className={`px-4 py-2 rounded-lg transition ${
-          filter === "active"
-            ? "border border-localiza-green bg-localiza-green hover:bg-localiza-green-dark text-white"
-            : "border border-gray-300 text-gray-700 dark:text-gray-300"
-        }`}
+        variant={filter === "active" ? "primary" : "secondary"}
       >
         Ativas
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => setFilter("completed")}
-        className={`px-4 py-2 rounded-lg transition ${
-          filter === "completed"
-            ? "border border-localiza-green bg-localiza-green hover:bg-localiza-green-dark text-white"
-            : "border border-gray-300 text-gray-700 dark:text-gray-300"
-        }`}
+        variant={filter === "completed" ? "primary" : "secondary"}
       >
         Completas
-      </button>
+      </Button>
       <input
         type="text"
         value={filterText}

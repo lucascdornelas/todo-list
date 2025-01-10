@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useTaskStore from "../store/taskStore";
+import Button from "./ui/Button";
 
 type TaskListProps = {
   tasksPerPage?: number;
 };
 
 export default function TaskList(props: TaskListProps) {
-  const {
-    tasksPerPage = 5,
-  } = props;
+  const { tasksPerPage = 5 } = props;
 
   const tasks = useTaskStore((state) => state.tasks);
   const removeTask = useTaskStore((state) => state.removeTask);
@@ -77,29 +76,23 @@ export default function TaskList(props: TaskListProps) {
       </ul>
 
       <div className="flex items-center justify-center mt-4 space-x-2">
-        <button
+        <Button
+          variant="secondary"
+          size="sm"
           onClick={() => changePage(currentPage - 1)}
-          className={`px-3 py-1 rounded-lg border ${
-            currentPage === 1
-              ? "text-gray-400 border-gray-300 cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-200 dark:border-gray-400 dark:text-gray-700"
-              : "text-gray-700 border-gray-400 dark:text-gray-100 dark:border-gray-500"
-          }`}
           disabled={currentPage === 1}
         >
           <ChevronLeft size={16} />
-        </button>
+        </Button>
         <span className="px-3 py-1 text-gray-700 dark:text-gray-300">{`${currentPage} de ${totalPages}`}</span>
-        <button
+        <Button
+          variant="secondary"
+          size="sm"
           onClick={() => changePage(currentPage + 1)}
-          className={`px-3 py-1 rounded-lg border ${
-            currentPage === totalPages
-              ? "text-gray-400 border-gray-300 cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-200 dark:border-gray-400 dark:text-gray-700"
-              : "text-gray-700 border-gray-400 dark:text-gray-100 dark:border-gray-500"
-          }`}
           disabled={currentPage === totalPages}
         >
           <ChevronRight size={16} />
-        </button>
+        </Button>
       </div>
     </div>
   );

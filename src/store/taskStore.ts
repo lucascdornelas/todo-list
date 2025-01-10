@@ -5,7 +5,7 @@ import { Task } from "../types";
 type TaskStore = {
   tasks: Task[];
   filterText: string;
-  filter: string;
+  filter: "all" | "active" | "completed";
   addTask: (newTask: string) => void;
   removeTask: (id: number) => void;
   toggleTaskCompletion: (id: number) => void;
@@ -13,7 +13,7 @@ type TaskStore = {
   deleteAllTasks: () => void;
   markAllCompleted: () => void;
   setFilterText: (filterText: string) => void;
-  setFilter: (filter: string) => void;
+  setFilter: (filter: "all" | "active" | "completed") => void;
 };
 
 const useTaskStore = create(
@@ -55,7 +55,7 @@ const useTaskStore = create(
           tasks: state.tasks.map((task) => ({ ...task, completed: true })),
         })),
       setFilterText: (filterText: string) => set({ filterText }),
-      setFilter: (filter: string) => set({ filter }),
+      setFilter: (filter: "all" | "active" | "completed") => set({ filter }),
     }),
     {
       name: "task-store",
