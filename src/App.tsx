@@ -15,7 +15,7 @@ export function App() {
     <div className={`${theme === "dark" ? "dark" : ""}`}>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-600 flex items-center justify-center dark:text-white">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-lg">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-start mb-4">
             <div className="flex flex-col flex-start justify-between mb-4">
               <h1 className="text-2xl font-bold text-localiza-green dark:text-dark-localiza-text mb-2">
                 Lista de Tarefas
