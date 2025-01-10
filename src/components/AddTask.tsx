@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import useTaskStore from "../store/taskStore";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export default function AddTask() {
   const addTask = useTaskStore((state) => state.addTask);
+
+  const { formatMessage } = useIntl();
 
   const [text, setText] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
@@ -21,11 +24,11 @@ export default function AddTask() {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Digite uma nova tarefa"
+        placeholder={formatMessage({ id: "app.task.add.placeholder" })}
         className="w-full"
       />
       <Button type="submit" className="w-full">
-        Adicionar Tarefa
+        <FormattedMessage id="app.task.add" />
       </Button>
     </form>
   );

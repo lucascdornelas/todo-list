@@ -1,0 +1,25 @@
+{
+  "app.title": "Lista de Tareas",
+  "app.subtitle": "Organiza y gestiona tus tareas diarias",
+
+  "app.task.add": "Agregar Tarea",
+  "app.task.add.placeholder": "Ingresa una nueva tarea",
+
+  "app.task.batch.complete": "Marcar Todas como Completadas",
+  "app.task.batch.delete": "Eliminar Todas",
+
+  "app.task.filter.all": "Todas",
+  "app.task.filter.active": "Activas",
+  "app.task.filter.completed": "Completadas",
+  "app.task.filter.placeholder": "Buscar tareas",
+
+  "app.task.item.uncomplete": "Marcar como Incompleta",
+  "app.task.item.complete": "Marcar como Completada",
+  "app.task.item.edit": "Editar Tarea",
+  "app.task.item.delete": "Eliminar Tarea",
+
+  "app.task.list.noTasksFound": "No se encontraron tareas.",
+  "app.task.list.previousPage": "Página Anterior",
+  "app.task.list.nextPage": "Página Siguiente",
+  "app.task.list.page": "{currentPage} de {totalPages}"
+}

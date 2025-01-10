@@ -1,0 +1,25 @@
+{
+  "app.title": "Task List",
+  "app.subtitle": "Organize and manage your daily tasks",
+
+  "app.task.add": "Add Task",
+  "app.task.add.placeholder": "Enter a new task",
+
+  "app.task.batch.complete": "Mark All as Completed",
+  "app.task.batch.delete": "Delete All",
+
+  "app.task.filter.all": "All",
+  "app.task.filter.active": "Active",
+  "app.task.filter.completed": "Completed",
+  "app.task.filter.placeholder": "Search tasks",
+
+  "app.task.item.uncomplete": "Mark as Incomplete",
+  "app.task.item.complete": "Mark as Completed",
+  "app.task.item.edit": "Edit Task",
+  "app.task.item.delete": "Delete Task",
+
+  "app.task.list.noTasksFound": "No tasks found.",
+  "app.task.list.previousPage": "Previous Page",
+  "app.task.list.nextPage": "Next Page",
+  "app.task.list.page": "{currentPage} of {totalPages}"
+}

@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     | "success"
     | "warning"
     | "neutral";
-  size?: "default" | "sm" | "icon";
+  size?: "default" | "sm" | "xsm" | "icon";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -47,6 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const sizeClasses = {
       default: "px-4 py-2 ",
       sm: "px-3 py-1 ",
+      xsm: "px-2 py-1 text-xs ",
       icon: " ",
     };
 

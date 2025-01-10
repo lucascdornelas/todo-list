@@ -3,6 +3,7 @@ import TaskItem from "./TaskItem";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useTaskStore from "../store/taskStore";
 import Button from "./ui/Button";
+import { FormattedMessage, useIntl } from "react-intl";
 
 type TaskListProps = {
   tasksPerPage?: number;
@@ -10,6 +11,8 @@ type TaskListProps = {
 
 export default function TaskList(props: TaskListProps) {
   const { tasksPerPage = 5 } = props;
+
+  const { formatMessage } = useIntl();
 
   const tasks = useTaskStore((state) => state.tasks);
   const removeTask = useTaskStore((state) => state.removeTask);
@@ -70,7 +73,7 @@ export default function TaskList(props: TaskListProps) {
           ))
         ) : (
           <li className="text-center text-gray-500 py-4">
-            Nenhuma tarefa encontrada.
+            <FormattedMessage id="app.task.list.noTasksFound" />
           </li>
         )}
       </ul>
@@ -81,17 +84,19 @@ export default function TaskList(props: TaskListProps) {
           size="sm"
           onClick={() => changePage(currentPage - 1)}
           disabled={currentPage === 1}
-          aria-label="Página anterior"
+          aria-label={formatMessage({ id: "app.task.list.previousPage" })}
         >
           <ChevronLeft size={16} />
         </Button>
-        <span className="px-3 py-1 text-gray-700 dark:text-gray-300">{`${currentPage} de ${totalPages}`}</span>
+        <span className="px-3 py-1 text-gray-700 dark:text-gray-300">
+          {formatMessage({ id: "app.task.list.page" }, { currentPage, totalPages })}
+        </span>
         <Button
           variant="secondary"
           size="sm"
           onClick={() => changePage(currentPage + 1)}
           disabled={currentPage === totalPages}
-          aria-label="Próxima página"
+          aria-label={formatMessage({ id: "app.task.list.nextPage" })}
         >
           <ChevronRight size={16} />
         </Button>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Task } from "../types";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
+import { useIntl } from "react-intl";
 
 type TaskItemProps = {
   task: Task;
@@ -13,6 +14,7 @@ type TaskItemProps = {
 
 export default function TaskItem(props: TaskItemProps) {
   const { task, toggleTaskCompletion, removeTask, editTask } = props;
+  const { formatMessage } = useIntl();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(task.text);
@@ -70,7 +72,11 @@ export default function TaskItem(props: TaskItemProps) {
         className={"ml-3 flex items-center justify-center w-10 h-10"}
         variant="success"
         size="icon"
-        aria-label="Alternar Completude da Tarefa"
+        aria-label={formatMessage({
+          id: task.completed
+            ? "app.task.item.uncomplete"
+            : "app.task.item.complete",
+        })}
       >
         {task.completed ? <Undo2 size={20} /> : <Check size={20} />}
       </Button>
@@ -80,7 +86,7 @@ export default function TaskItem(props: TaskItemProps) {
         className="ml-3 flex items-center justify-center w-10 h-10"
         variant="neutral"
         size="icon"
-        aria-label="Editar Tarefa"
+        aria-label={formatMessage({ id: "app.task.item.edit" })}
       >
         <Edit2 size={20} />
       </Button>
@@ -90,7 +96,7 @@ export default function TaskItem(props: TaskItemProps) {
         className="ml-3 flex items-center justify-center w-10 h-10 rounded-lg border"
         variant="warning"
         size="icon"
-        aria-label="Remover Tarefa"
+        aria-label={formatMessage({ id: "app.task.item.remove" })}
       >
         <Trash2 size={20} />
       </Button>
