@@ -2,6 +2,7 @@ import { Check, Undo2, Trash2, Edit2 } from "lucide-react";
 import { useState } from "react";
 import { Task } from "../types";
 import Button from "./ui/Button";
+import Input from "./ui/Input";
 
 type TaskItemProps = {
   task: Task;
@@ -39,7 +40,7 @@ export default function TaskItem(props: TaskItemProps) {
          ${task.completed ? "border-green-500" : "border-gray-300"}`}
     >
       {isEditing ? (
-        <input
+        <Input
           type="text"
           value={editedText}
           onChange={(e) => setEditedText(e.target.value)}
@@ -48,7 +49,7 @@ export default function TaskItem(props: TaskItemProps) {
             if (e.key === "Escape") handleCancelEdit();
           }}
           onBlur={handleSaveEdit}
-          className="flex-1 px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:bg-gray-800 dark:border-gray-400 dark:focus:ring-gray-400 dark:text-gray-300"
+          className="flex-1 border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:bg-gray-800 dark:border-gray-400 dark:focus:ring-gray-400 dark:text-gray-300"
           autoFocus
         />
       ) : (
