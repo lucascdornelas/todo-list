@@ -2,6 +2,8 @@ import { vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TaskList from "./TaskList";
 import useTaskStore from "../store/taskStore";
+import { IntlProvider } from "react-intl";
+import messages from "../i18n/messages";
 
 vi.mock("../store/taskStore", () => ({
   default: vi.fn(),
@@ -31,10 +33,17 @@ describe("TaskList Component", () => {
         setFilter: vi
           .fn()
           .mockImplementation((filter: "all" | "active" | "completed") => {}),
+          reorderTasks: vi.fn(),
       });
     });
 
-    render(<TaskList tasksPerPage={5} />);
+    render(<TaskList tasksPerPage={5} />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     expect(screen.getByText("Tarefa 1")).toBeInTheDocument();
     expect(screen.getByText("Tarefa 2")).toBeInTheDocument();
@@ -43,7 +52,7 @@ describe("TaskList Component", () => {
     expect(screen.getByText("Tarefa 5")).toBeInTheDocument();
     expect(screen.queryByText("Tarefa 6")).not.toBeInTheDocument();
 
-    const nextPageButton = screen.getByLabelText("Próxima página");
+    const nextPageButton = screen.getByRole("button", { name: /Próxima página/i });
     fireEvent.click(nextPageButton);
 
     expect(screen.getByText("Tarefa 6")).toBeInTheDocument();
@@ -70,10 +79,17 @@ describe("TaskList Component", () => {
         setFilter: vi
           .fn()
           .mockImplementation((filter: "all" | "active" | "completed") => {}),
+        reorderTasks: vi.fn(),
       });
     });
 
-    render(<TaskList />);
+    render(<TaskList />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     expect(screen.getByText("Nenhuma tarefa encontrada.")).toBeInTheDocument();
   });

@@ -1,6 +1,8 @@
 import { vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import BatchActionsBar from "./BatchActionsBar";
+import { IntlProvider } from "react-intl";
+import messages from "../i18n/messages";
 
 export const mockMarkAllCompleted = vi.fn();
 export const mockDeleteAllTasks = vi.fn();
@@ -30,7 +32,13 @@ describe("BatchActionsBar Component", () => {
   });
 
   it("should render the action buttons", () => {
-    render(<BatchActionsBar />);
+    render(<BatchActionsBar />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     expect(
       screen.getByRole("button", { name: /Marcar Todas como Completas/i })
@@ -41,7 +49,13 @@ describe("BatchActionsBar Component", () => {
   });
 
   it("should call markAllCompleted when the 'Marcar Todas como Completas' button is clicked", () => {
-    render(<BatchActionsBar />);
+    render(<BatchActionsBar />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     const markAllCompletedButton = screen.getByRole("button", {
       name: /Marcar Todas como Completas/i,
@@ -52,7 +66,13 @@ describe("BatchActionsBar Component", () => {
   });
 
   it("should call deleteAllTasks when the 'Excluir Todas' button is clicked", () => {
-    render(<BatchActionsBar />);
+    render(<BatchActionsBar />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     const deleteAllButton = screen.getByRole("button", {
       name: /Excluir Todas/i,

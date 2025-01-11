@@ -11,7 +11,7 @@
   "app.task.filter.all": "Todas",
   "app.task.filter.active": "Ativas",
   "app.task.filter.completed": "Completas",
-  "app.task.filter.placeholder": "Buscar tarefas",
+  "app.task.filter.placeholder": "Buscar tarefa",
 
   "app.task.item.uncomplete": "Marcar como Incompleta",
   "app.task.item.complete": "Marcar como Completa",

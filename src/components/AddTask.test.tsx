@@ -1,6 +1,8 @@
 import { vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import AddTask from "./AddTask";
+import { IntlProvider } from "react-intl";
+import messages from "../i18n/messages";
 
 const mockAddTask = vi.fn();
 
@@ -28,7 +30,13 @@ describe("AddTask Component", () => {
   });
 
   it("should render the input and button elements", () => {
-    render(<AddTask />);
+    render(<AddTask />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     expect(
       screen.getByPlaceholderText("Digite uma nova tarefa")
@@ -39,7 +47,13 @@ describe("AddTask Component", () => {
   });
 
   it("should call addTask with the input value when the form is submitted", () => {
-    render(<AddTask />);
+    render(<AddTask />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     const input = screen.getByPlaceholderText("Digite uma nova tarefa");
     fireEvent.change(input, { target: { value: "Minha Nova Tarefa" } });
@@ -53,7 +67,13 @@ describe("AddTask Component", () => {
   });
 
   it("should not call addTask when the input is empty", () => {
-    render(<AddTask />);
+    render(<AddTask />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     const button = screen.getByRole("button", { name: /Adicionar Tarefa/i });
     fireEvent.click(button);

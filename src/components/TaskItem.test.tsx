@@ -2,6 +2,8 @@ import { vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TaskItem from "./TaskItem";
 import { Task } from "../types";
+import { IntlProvider } from "react-intl";
+import messages from "../i18n/messages";
 
 export const mockToggleTaskCompletion = vi.fn();
 export const mockRemoveTask = vi.fn();
@@ -27,7 +29,14 @@ describe("TaskItem Component", () => {
         toggleTaskCompletion={mockToggleTaskCompletion}
         removeTask={mockRemoveTask}
         editTask={mockEditTask}
-      />
+      />,
+      {
+        wrapper: ({ children }) => (
+          <IntlProvider locale="pt" messages={messages["pt"]}>
+            {children}
+          </IntlProvider>
+        ),
+      }
     );
 
     expect(screen.getByText(/Teste 123/i)).toBeInTheDocument();
@@ -40,10 +49,17 @@ describe("TaskItem Component", () => {
         toggleTaskCompletion={mockToggleTaskCompletion}
         removeTask={mockRemoveTask}
         editTask={mockEditTask}
-      />
+      />,
+      {
+        wrapper: ({ children }) => (
+          <IntlProvider locale="pt" messages={messages["pt"]}>
+            {children}
+          </IntlProvider>
+        ),
+      }
     );
 
-    const toggleButton = screen.getByLabelText("Alternar Completude da Tarefa");
+    const toggleButton = screen.getByLabelText("Marcar como Completa");
     fireEvent.click(toggleButton);
 
     expect(mockToggleTaskCompletion).toHaveBeenCalledTimes(1);
@@ -57,10 +73,17 @@ describe("TaskItem Component", () => {
         toggleTaskCompletion={mockToggleTaskCompletion}
         removeTask={mockRemoveTask}
         editTask={mockEditTask}
-      />
+      />,
+      {
+        wrapper: ({ children }) => (
+          <IntlProvider locale="pt" messages={messages["pt"]}>
+            {children}
+          </IntlProvider>
+        ),
+      }
     );
 
-    const removeButton = screen.getByLabelText("Remover Tarefa");
+    const removeButton = screen.getByLabelText("Excluir Tarefa");
     fireEvent.click(removeButton);
 
     expect(mockRemoveTask).toHaveBeenCalledTimes(1);
@@ -74,7 +97,14 @@ describe("TaskItem Component", () => {
         toggleTaskCompletion={mockToggleTaskCompletion}
         removeTask={mockRemoveTask}
         editTask={mockEditTask}
-      />
+      />,
+      {
+        wrapper: ({ children }) => (
+          <IntlProvider locale="pt" messages={messages["pt"]}>
+            {children}
+          </IntlProvider>
+        ),
+      }
     );
 
     const taskText = screen.getByText(/Teste 123/i);
@@ -97,7 +127,14 @@ describe("TaskItem Component", () => {
         toggleTaskCompletion={mockToggleTaskCompletion}
         removeTask={mockRemoveTask}
         editTask={mockEditTask}
-      />
+      />,
+      {
+        wrapper: ({ children }) => (
+          <IntlProvider locale="pt" messages={messages["pt"]}>
+            {children}
+          </IntlProvider>
+        ),
+      }
     );
 
     const taskText = screen.getByText(/Teste 123/i);

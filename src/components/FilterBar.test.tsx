@@ -1,6 +1,8 @@
 import { vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import FilterBar from "./FilterBar";
+import { IntlProvider } from "react-intl";
+import messages from "../i18n/messages";
 
 const mockSetFilter = vi.fn();
 const mockSetFilterText = vi.fn();
@@ -30,7 +32,13 @@ describe("FilterBar Component", () => {
   });
 
   it("should render filter buttons and input", () => {
-    render(<FilterBar />);
+    render(<FilterBar />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     expect(screen.getByRole("button", { name: /Todas/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Ativas/i })).toBeInTheDocument();
@@ -44,7 +52,13 @@ describe("FilterBar Component", () => {
   });
 
   it("should call setFilter when filter buttons are clicked", () => {
-    render(<FilterBar />);
+    render(<FilterBar />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     const todasButton = screen.getByRole("button", { name: /Todas/i });
     const ativasButton = screen.getByRole("button", { name: /Ativas/i });
@@ -63,7 +77,13 @@ describe("FilterBar Component", () => {
   });
 
   it("should update filterText when typing in the input", () => {
-    render(<FilterBar />);
+    render(<FilterBar />, {
+      wrapper: ({ children }) => (
+        <IntlProvider locale="pt" messages={messages["pt"]}>
+          {children}
+        </IntlProvider>
+      ),
+    });
 
     const input = screen.getByPlaceholderText("Buscar tarefa");
 
