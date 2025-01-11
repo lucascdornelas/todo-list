@@ -22,8 +22,8 @@ export function App() {
     <IntlProvider locale={locale} messages={messages[locale]}>
       <div className={`${theme === "dark" ? "dark" : ""}`}>
         <div className="min-h-screen bg-gray-100 dark:bg-gray-600 flex items-center justify-center dark:text-white">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-lg">
-            <div className="flex justify-between items-start mb-4">
+          <div className="bg-white dark:bg-gray-800 p-6 shadow-lg w-full min-h-screen md:min-h-full md:max-w-lg md:rounded-lg">
+            <div className="flex justify-between items-start mb-4 flex-wrap">
               <div className="flex flex-col flex-start justify-between mb-4">
                 <h1 className="text-2xl font-bold text-localiza-green dark:text-dark-localiza-text mb-2">
                   <FormattedMessage id="app.title" />
@@ -32,14 +32,16 @@ export function App() {
                   <FormattedMessage id="app.subtitle" />
                 </p>
               </div>
-              <LanguageSwitcher />
-              <Button onClick={toggleTheme}>
-                {theme === "light" ? (
-                  <MoonIcon size={16} />
-                ) : (
-                  <SunIcon size={16} />
-                )}
-              </Button>
+              <div className="flex flex-end flex-wrap gap-4">
+                <LanguageSwitcher />
+                <Button onClick={toggleTheme}>
+                  {theme === "light" ? (
+                    <MoonIcon size={16} />
+                  ) : (
+                    <SunIcon size={16} />
+                  )}
+                </Button>
+              </div>
             </div>
             <AddTask />
             <FilterBar />

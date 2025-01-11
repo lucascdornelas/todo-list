@@ -18,6 +18,7 @@ export default function TaskItem(props: TaskItemProps) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(task.text);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleSaveEdit = () => {
     if (editedText.trim() !== "") {
@@ -36,6 +37,10 @@ export default function TaskItem(props: TaskItemProps) {
     else setIsEditing(true);
   };
 
+  const toggleExpand = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
   return (
     <li
       className={`flex items-center justify-between p-4 rounded-lg border shadow-sm bg-white dark:bg-gray-800 transition
@@ -51,17 +56,18 @@ export default function TaskItem(props: TaskItemProps) {
             if (e.key === "Escape") handleCancelEdit();
           }}
           onBlur={handleSaveEdit}
-          className="flex-1 border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:bg-gray-800 dark:border-gray-400 dark:focus:ring-gray-400 dark:text-gray-300"
+          className="flex-1 w-auto border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:bg-gray-800 dark:border-gray-400 dark:focus:ring-gray-400 dark:text-gray-300"
           autoFocus
         />
       ) : (
         <span
+          onClick={toggleExpand}
           onDoubleClick={() => setIsEditing(true)}
           className={`flex-1 text-sm cursor-pointer ${
             task.completed
               ? "line-through text-gray-500 dark:text-gray-400"
               : "text-gray-800 dark:text-gray-300"
-          }`}
+          } ${isExpanded ? "whitespace-normal" : "truncate"}`}
         >
           {task.text}
         </span>
