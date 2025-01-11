@@ -5,6 +5,8 @@ import useTaskStore from "../store/taskStore";
 import Button from "./ui/Button";
 import { FormattedMessage, useIntl } from "react-intl";
 
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+
 type TaskListProps = {
   tasksPerPage?: number;
 };
@@ -23,6 +25,7 @@ export default function TaskList(props: TaskListProps) {
 
   const filterText = useTaskStore((state) => state.filterText);
   const filter = useTaskStore((state) => state.filter);
+  const reorderTasks = useTaskStore((state) => state.reorderTasks);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -45,6 +48,21 @@ export default function TaskList(props: TaskListProps) {
       setCurrentPage(1);
     }
   }, [filteredTasks.length, totalPages, currentPage]);
+
+  useEffect(() => {
+    return monitorForElements({
+      canMonitor: () => true,
+      onDrop({ location, source }) {
+        const target = location.current.dropTargets[0];
+        if (!target) return;
+        const sourceId = source.data.id as number;
+        const targetId = target.data.id as number;
+        const isValidIds = sourceId >= 0 && targetId >= 0;
+        if (!isValidIds) return;
+        reorderTasks(sourceId, targetId);
+      },
+    });
+  }, []);
 
   const startIndex = (currentPage - 1) * tasksPerPage;
   const currentTasks = filteredTasks.slice(
@@ -89,7 +107,10 @@ export default function TaskList(props: TaskListProps) {
           <ChevronLeft size={16} />
         </Button>
         <span className="px-3 py-1 text-gray-700 dark:text-gray-300">
-          {formatMessage({ id: "app.task.list.page" }, { currentPage, totalPages })}
+          {formatMessage(
+            { id: "app.task.list.page" },
+            { currentPage, totalPages }
+          )}
         </span>
         <Button
           variant="secondary"

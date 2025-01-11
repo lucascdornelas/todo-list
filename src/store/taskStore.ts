@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, devtools } from "zustand/middleware";
 import { Task } from "../types";
 
 type TaskStore = {
@@ -14,10 +14,11 @@ type TaskStore = {
   markAllCompleted: () => void;
   setFilterText: (filterText: string) => void;
   setFilter: (filter: "all" | "active" | "completed") => void;
+  reorderTasks: (sourceId: number, targetId: number) => void;
 };
 
 const useTaskStore = create(
-  persist<TaskStore>(
+  devtools(persist<TaskStore>(
     (set) => ({
       tasks: [] as Task[],
       filterText: "",
@@ -56,11 +57,30 @@ const useTaskStore = create(
         })),
       setFilterText: (filterText: string) => set({ filterText }),
       setFilter: (filter: "all" | "active" | "completed") => set({ filter }),
+      reorderTasks: (sourceId: number, targetId: number) =>
+        set((state: { tasks: Task[] }) => {
+          const newTasks = [...state.tasks];
+          const sourceIndex = newTasks.findIndex((task) => task.id === sourceId);
+          const targetIndex = newTasks.findIndex((task) => task.id === targetId);
+
+          if (sourceIndex === -1 || targetIndex === -1) {
+            return { tasks: newTasks };
+          }
+
+          const [movedTask] = newTasks.splice(sourceIndex, 1);
+          newTasks.splice(targetIndex, 0, movedTask);
+
+          const updatedTasks = newTasks.map((task, index) => ({ ...task, id: index }));
+
+          return {
+            tasks: updatedTasks,
+          };
+        }),
     }),
     {
       name: "task-store",
     }
-  )
+  ))
 );
 
 export default useTaskStore;
