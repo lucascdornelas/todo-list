@@ -65,7 +65,6 @@ npm run test
 
 ## 📸 Demo
 
-### Light Mode and Dark Mode
 ![image](https://github.com/user-attachments/assets/787f54ca-0b03-46ba-b9d3-411a54d2d89f)
 
 
